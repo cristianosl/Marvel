@@ -1,3 +1,1 @@
-export interface IModel {
-
-}
+export interface IModel {}
