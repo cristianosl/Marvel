@@ -5,6 +5,7 @@ import {
   CharacterParameters
 } from "../models/characters/index";
 import moment from "moment";
+import Image from "../models/Image";
 
 /**
  * Realiza uma consulta de personagens
@@ -38,7 +39,9 @@ export class CharacterService extends MarvelService {
                 new Character(
                   character.id,
                   character.name,
+                  character.description,
                   moment(character.modified).toDate(),
+                  new Image(character.thumbnail.type, character.thumbnail.url),
                   character.resourceURI
                 )
               );

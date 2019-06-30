@@ -3,6 +3,7 @@ import "./App.css";
 import { CharacterService } from "../services";
 import { Character } from "../models";
 import { CharacterParameters } from "../models/characters";
+import { Button } from "@material-ui/core";
 
 interface IProps {}
 interface IApp {
@@ -20,7 +21,9 @@ class App extends React.Component<IProps, IApp> {
 
     let service = new CharacterService();
     let params = new CharacterParameters();
-    params.comics = [21366];
+    params.comics = [43495, 43506];
+    params.series = [16450, 7524];
+    // params.events = [269];
     service
       .getCharacters(params)
       .then(characters => {
@@ -40,6 +43,10 @@ class App extends React.Component<IProps, IApp> {
           return character.name + ";";
         })}
         {this.state.characters.length === 0 && "Sem resultados"}
+
+        <Button variant="contained" color="primary">
+          Hello
+        </Button>
       </div>
     );
   }
