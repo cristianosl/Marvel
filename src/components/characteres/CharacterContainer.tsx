@@ -1,20 +1,18 @@
 import * as React from "react";
-import { ICharacterDataContainer, Character } from "../../models/characters";
+import { CharacterDataContainer } from "../../models/characters";
 import { CharacterItem } from "./CharacterItem";
-import Image from "../../models/Image";
+import { Grid } from "@material-ui/core";
+import './CharacterContainer.css';
 
-export const CharacterContainer: React.FC<ICharacterDataContainer> = props => {
-  let character = new Character(
-    1,
-    "nome",
-    "descricao",
-    new Date(),
-    new Image("jpg", ""),
-    ""
-  );
+export const CharacterContainer: React.FC<
+  CharacterDataContainer
+> = characterDataContainer => {
   return (
-    <div className="character-container">
-      <CharacterItem {...character} />
-    </div>
+    <Grid container className="character-container" spacing={2}>
+      {characterDataContainer.results &&
+        characterDataContainer.results.map(character => {
+          return <CharacterItem {...character} key={character.id} />;
+        })}
+    </Grid>
   );
 };

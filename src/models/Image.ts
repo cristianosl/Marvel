@@ -1,8 +1,10 @@
 /**
  * Representação de uma imagem
  */
-export default class Image {
-    constructor(readonly type: string, readonly url: string){
+export class Image {
+  constructor(readonly path: string, readonly extension: string) {}
 
-    }
+  public getFullPath() {
+    return `${this.path}.${this.extension}`;
+  }
 }

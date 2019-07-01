@@ -1,5 +1,5 @@
 import { Character } from "../index";
-import Image from "../Image";
+import { Image } from "../Image";
 
 it("instancia um novo personagem", () => {
   let id = 1;
@@ -8,7 +8,14 @@ it("instancia um novo personagem", () => {
   let thumbnail = new Image("jpg", "http://www.google.com.br/logo.jpg");
   let modified = new Date();
   let resourceURI = "https://www.marvel.com/";
-  let character = new Character(id, name, description, modified, thumbnail, resourceURI);
+  let character = new Character(
+    id,
+    name,
+    description,
+    modified,
+    thumbnail,
+    resourceURI
+  );
 
   expect(character.id).toBe(id);
   expect(character.name).toBe(name);

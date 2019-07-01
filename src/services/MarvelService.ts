@@ -45,7 +45,7 @@ export abstract class MarvelService implements IService {
   /**
    * Retorna os parametros padrões
    */
-  protected get queryJSON(): IQueryJSON {
+  protected get queryJSONAuth(): IQueryJSON {
     return {
       ts: this._ts,
       apikey: this._puk,

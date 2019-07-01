@@ -1,0 +1,38 @@
+.pagination {
+  text-align: center;
+  padding: 30px 0;
+}
+.pagination .MuiButton-root {
+  font-family: "Bangers", cursive;
+  background-color: #000;
+  font-size: 14px;
+  border-radius: 18px;
+  margin: 0 2px;
+}
+.pagination .MuiFlatPageButton-root {
+  min-width: 36px;
+  min-height: 36px;
+}
+.pagination .MuiButton-root.Mui-disabled {
+  color: rgba(255, 255, 255, 0.3);
+}
+.pagination .MuiButton-textPrimary {
+  color: #fff;
+}
+.pagination .MuiButton-textPrimary:hover {
+  background-color: #666;
+}
+.pagination .MuiButton-textSecondary:hover {
+  background-color: #666;
+}
+@media (min-width: 768px) {
+  .pagination .MuiButton-root {
+    font-size: 20px;
+    border-radius: 25px;
+    margin: 0 4px;
+  }
+  .pagination .MuiFlatPageButton-root {
+    min-width: 50px;
+    min-height: 50px;
+  }
+}

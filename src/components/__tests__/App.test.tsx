@@ -2,6 +2,6 @@ import React from 'react';
 import App from '../App';
 import { shallow } from 'enzyme';
 
-it('renders without crashing', () => {
+it('Renderizar corretamente a página inicial', () => {
   shallow(<App />);
 });

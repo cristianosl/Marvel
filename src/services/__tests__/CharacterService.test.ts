@@ -3,23 +3,20 @@ import { Character } from "../../models";
 import { CharacterParameters } from "../../models/characters";
 
 describe("Testando consumo de serviços referente aos personagens", () => {
-  let _service: CharacterService;
   let _characters: Character[];
-
-  beforeAll(() => {
-    _service = new CharacterService();
-  });
 
   xit("Deve retornar uma lista de 20 personagens", async () => {
     expect.assertions(1);
-    _characters = await _service.getCharacters();
+    const service = new CharacterService();
+    _characters = await service.getCharacters();
     expect(_characters.length).toBe(20);
   });
 
   xit("Deve retornar apenas 1 registro quando especificado limit=1", async () => {
     expect.assertions(1);
     let params = new CharacterParameters(1);
-    _characters = await _service.getCharacters(params);
+    const service = new CharacterService(params);
+    _characters = await service.getCharacters();
     expect(_characters.length).toBe(1);
   });
 
@@ -27,7 +24,8 @@ describe("Testando consumo de serviços referente aos personagens", () => {
     expect.assertions(1);
     let params = new CharacterParameters();
     params.comics = [21366];
-    _characters = await _service.getCharacters(params);
+    const service = new CharacterService(params);
+    _characters = await service.getCharacters();
     expect(_characters.length).toBeGreaterThan(0);
   });
 
@@ -35,15 +33,17 @@ describe("Testando consumo de serviços referente aos personagens", () => {
     expect.assertions(1);
     let params = new CharacterParameters();
     params.series = [1945];
-    _characters = await _service.getCharacters(params);
+    const service = new CharacterService(params);
+    _characters = await service.getCharacters();
     expect(_characters.length).toBeGreaterThan(0);
   });
 
-  it("Deve retornar apenas personagens onde events=269 (Secret Invasion)", async () => {
+  xit("Deve retornar apenas personagens onde events=269 (Secret Invasion)", async () => {
     expect.assertions(1);
     let params = new CharacterParameters();
     params.events = [269];
-    _characters = await _service.getCharacters(params);
+    const service = new CharacterService(params);
+    _characters = await service.getCharacters();
     expect(_characters.length).toBeGreaterThan(0);
   });
 
@@ -53,7 +53,8 @@ describe("Testando consumo de serviços referente aos personagens", () => {
     params.comics = [21366];
     params.series = [3374];
     params.events = [269];
-    _characters = await _service.getCharacters(params);
+    const service = new CharacterService(params);
+    _characters = await service.getCharacters();
     expect(_characters.length).toBe(0);
   });
 });
