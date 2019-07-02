@@ -1,6 +1,7 @@
-.character-item {
+.MuiPaper-elevation1.character-item {
   padding: 8px;
-  background-color: rgba(238, 232, 170, 0.8);
+  /* background-color: rgba(238, 232, 170, 0.8); */
+  background-color: rgba(0, 0, 0, 1);
 }
 .character-item__name {
   font-weight: normal;
@@ -17,6 +18,7 @@
 .character-item__thumbnail-fullpath {
   width: 100%;
   max-height: 537px;
+  background: #000;
   overflow: hidden;
   align-items: center;
   display: flex;
@@ -32,4 +34,19 @@
   font-size: 14px;
   font-style: italic;
   padding: 20px 10px;
+}
+
+.character-details {
+  text-align: center;
+  padding-top: 8px;
+}
+.MuiButtonBase-root.character-details__btn {
+  color: rgb(255, 234, 8);
+  background-color: rgb(169, 8, 8);
+  font-family: "Bangers", cursive;
+  font-size: 24px;
+  display: block;
+}
+.MuiButtonBase-root.character-details__btn:hover {
+  background-color: rgba(169, 8, 8, 0.7);
 }

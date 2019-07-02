@@ -10,7 +10,7 @@ it("Renderizar o <CharacterItem /> corretamente", () => {
     "descricao",
     new Date(),
     new Image("imagem", "jpg"),
-    "http://"
+    "http://www.1.com"
   );
-  shallow(<CharacterItem {...character} />);
+  shallow(<CharacterItem character={character} />);
 });

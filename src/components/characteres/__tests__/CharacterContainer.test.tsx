@@ -33,8 +33,8 @@ it("Renderizar o <CharacterContainer /> corretamente", () => {
     characters
   );
   const wrapper = shallow(<CharacterContainer {...cdc} />);
-  const item1 = <CharacterItem {...c1} />;
-  const item2 = <CharacterItem {...c2} />;
+  const item1 = <CharacterItem character={c1} />;
+  const item2 = <CharacterItem character={c2} />;
   expect(wrapper.contains(item1)).toEqual(true);
   expect(wrapper.contains(item2)).toEqual(true);
 });

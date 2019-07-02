@@ -11,7 +11,7 @@ export const CharacterContainer: React.FC<
     <Grid container className="character-container" spacing={2}>
       {characterDataContainer.results &&
         characterDataContainer.results.map(character => {
-          return <CharacterItem {...character} key={character.id} />;
+          return <CharacterItem character={character} key={character.id} />;
         })}
     </Grid>
   );
