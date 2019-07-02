@@ -18,6 +18,9 @@ const AdapterLink = React.forwardRef<HTMLAnchorElement, LinkProps>(
   (props, ref) => <Link innerRef={ref as any} {...props} />
 );
 
+/**
+ * Componente para exibir um "card" de personagem
+ */
 export class CharacterItem extends React.Component<
   ICharacterItemProps,
   ICharacterItemState
@@ -26,10 +29,16 @@ export class CharacterItem extends React.Component<
   imgRef: React.RefObject<HTMLImageElement>;
   constructor(props: ICharacterItemProps) {
     super(props);
+
+    // Personagem atual
     this.character = props.character;
+
+    // Ref da imagem
     this.imgRef = React.createRef<HTMLImageElement>();
+
+    // Altura padrão da imagem
     this.state = {
-      style: { height: "10px" }
+      style: {}
     };
   }
 
@@ -37,13 +46,9 @@ export class CharacterItem extends React.Component<
     if (this.imgRef.current) {
       this.imgRef.current.addEventListener("load", e => {
         if (this.imgRef.current) {
-          console.log(
-            "this.imgRef.current.clientWidth",
-            this.imgRef.current.clientWidth
-          );
           this.setState({
             style: {
-              height: "294px"
+              height: this.imgRef.current.width
             }
           });
         }

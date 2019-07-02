@@ -32,4 +32,5 @@ header {
 }
 .logo-marvel img {
   width: 180px;
+  box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.6);
 }
