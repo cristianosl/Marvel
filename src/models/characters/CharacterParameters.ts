@@ -16,7 +16,7 @@ export interface ICharacterParametersJSON {
  */
 export class CharacterParameters implements IModel {
   constructor(
-    public limit: number = 20,
+    public limit: number = 18,
     public offset: number = 0,
     public comics: number[] = [],
     public events: number[] = [],

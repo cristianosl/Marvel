@@ -1,0 +1,44 @@
+.MuiMenu-list {
+  background-color: #cb898a;
+  border: 2px solid #000;
+}
+.form-control {
+  width: 100%;
+  background-color: transparent;
+  color: white;
+}
+.form-control .MuiInput-underline:after {
+  border-bottom: 2px solid #000;
+}
+.label.MuiInputLabel-formControl {
+  font-size: 22px;
+  color: #000;
+  font-weight: bold;
+}
+.label.MuiFormLabel-root.Mui-focused {
+  font-weight: bold;
+  color: #000;
+}
+.label.MuiInputLabel-shrink{
+    transform: translate(0, -4.5px) scale(0.75);
+}
+.filter-select.MuiInputBase-root {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-bottom-color: #000;
+  font-family: "Bangers", cursive;
+}
+.filter-select .MuiSelect-selectMenu{
+    padding-left: 10px;
+}
+.MuiTypography-root.MuiTypography-body1 {
+  font-size: 20px;
+  font-family: "Bangers", cursive;
+}
+.menu-item.MuiMenuItem-root {
+  color: #000;
+  font-family: "Bangers", cursive;
+  /* background-color: #cb898a; */
+}
+.MuiList-root .MuiCheckbox-colorSecondary.Mui-checked {
+  color: #000;
+}

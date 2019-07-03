@@ -11,22 +11,12 @@ import {
   Checkbox,
   ListItemText
 } from "@material-ui/core";
-
+import { ThemeMarvel } from "../ThemeMarvel";
+import "./NivelFilter.css";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    formControl: {
-      margin: theme.spacing(1),
-      width: "100%",
-      backgroundColor: "transparent"
-    },
-    label: {
-      fontSize: "22px",
-      color: 'rgb(255, 234, 8)'
-    },
-    menuItem: {
-      color: 'white'
-    }
+
   })
 );
 
@@ -55,8 +45,8 @@ export function NivelFilter(props: INivelProps) {
   }
 
   return (
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="select-multiple-checkbox" className={classes.label}>
+    <FormControl className="form-control">
+      <InputLabel htmlFor="select-multiple-checkbox" className="label">
         {props.label}
       </InputLabel>
       <Select
@@ -66,9 +56,10 @@ export function NivelFilter(props: INivelProps) {
         input={<Input id="select-multiple-checkbox" />}
         renderValue={selected => (selected as string[]).join(", ")}
         MenuProps={MenuProps}
+        className="filter-select"
       >
         {props.nivelOpts.map(nivelOpt => (
-          <MenuItem key={nivelOpt} value={nivelOpt} className={classes.menuItem}>
+          <MenuItem key={nivelOpt} value={nivelOpt} className="menu-item">
             <Checkbox checked={nivelValue.indexOf(nivelOpt) > -1} />
             <ListItemText primary={nivelOpt} />
           </MenuItem>
