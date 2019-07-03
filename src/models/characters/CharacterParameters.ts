@@ -1,3 +1,5 @@
+import { IModel } from "../IModel";
+
 /**
  * Retorno JSON dos parâmetros para formar uma consulta
  */
@@ -12,7 +14,7 @@ export interface ICharacterParametersJSON {
 /**
  * Define os parametros de entradas permitidos para realizar uma busca por personagens
  */
-export class CharacterParameters {
+export class CharacterParameters implements IModel {
   constructor(
     public limit: number = 20,
     public offset: number = 0,

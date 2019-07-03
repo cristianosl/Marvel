@@ -1,19 +1,24 @@
 .container:after {
-    content: "";
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    background: #fff url('../../images/marvel-universe-wallpapers-free-For-Free-Wallpaper.jpeg') fixed;
-    background-size: cover;
-    opacity: .3;
-  }
-  .container {
-    transition: .3s all;
-    padding-top: 20px;
-  }
-  .container--carregando {
-    opacity: .3;
-  }
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: #fff
+    url("../../images/marvel-universe-wallpapers-free-For-Free-Wallpaper.jpeg")
+    fixed;
+  background-size: cover;
+  opacity: 0.3;
+}
+.container {
+  transition: 0.3s all;
+  padding-top: 20px;
+}
+.container--carregando {
+  opacity: 0.3;
+}
+* {
+  box-sizing: border-box;
+}
