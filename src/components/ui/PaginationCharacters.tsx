@@ -2,14 +2,14 @@ import React from "react";
 import Pagination from "material-ui-flat-pagination";
 import './PaginationCharacters.css';
 
-interface PaginationCharactersProps {
+interface IPaginationCharactersProps {
   limit: number;
   offset: number;
   total: number;
   onClick(e: React.MouseEvent<HTMLElement, MouseEvent>, offset: number): void
 }
 export const PaginationCharacters: React.FC<
-  PaginationCharactersProps
+  IPaginationCharactersProps
 > = props => {
   return <Pagination {...props} className="pagination" />;
 };

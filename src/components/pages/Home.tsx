@@ -7,7 +7,7 @@ import { CharacterContainer } from "../characteres/CharacterContainer";
 import { PaginationCharacters } from "../ui/PaginationCharacters";
 import { CharacterService } from "../../services";
 import { Layout } from "../layouts/Layout";
-// import { Filters } from "../ui";
+import { Filters } from "../ui";
 
 /**
  * Interface para as props
@@ -75,7 +75,7 @@ export class Home extends React.Component<IAppProps, IAppState> {
             : "container"
         }
       >
-        {/* <Filters /> */}
+        <Filters />
         {this.state.characterDataWrapper &&
           this.state.characterDataWrapper.data && (
             <CharacterContainer {...this.state.characterDataWrapper.data} />

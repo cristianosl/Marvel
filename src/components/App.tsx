@@ -11,7 +11,7 @@ class App extends React.Component {
     return (
       <Router>
         <Route path="/" exact component={Home} />
-        <Route path="/character/" component={CharacterDetails} />
+        <Route path="/character/:id" component={CharacterDetails} />
       </Router>
     );
   }
