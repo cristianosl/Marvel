@@ -1,6 +1,8 @@
-import { ISummary } from "./ISummary";
-import { IModel } from "./IModel";
+import { ISummary } from "../interfaces/ISummary";
 
-export class Summary implements ISummary, IModel {
+/**
+ * Representação do Sumário
+ */
+export class Summary implements ISummary {
   constructor(readonly resourceURI: string, readonly name: string) {}
 }

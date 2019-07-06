@@ -5,20 +5,11 @@ import {
   MenuItem,
   InputLabel,
   Input,
-  makeStyles,
-  Theme,
-  createStyles,
   Checkbox,
   ListItemText
 } from "@material-ui/core";
-import { ThemeMarvel } from "../ThemeMarvel";
 import "./NivelFilter.css";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-
-  })
-);
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -36,8 +27,13 @@ interface INivelProps {
   nivelOpts: string[];
 }
 
+/**
+ * Dropdowns de niveis
+ * 
+ * @param props Propriedades
+ */
 export function NivelFilter(props: INivelProps) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [nivelValue, setNivel] = React.useState<string[]>([]);
 
   function handleChangeNivel(event: React.ChangeEvent<{ value: unknown }>) {

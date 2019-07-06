@@ -1,3 +1,3 @@
-export * from "./CharacterService";
-export * from "./IService";
+export * from "./GenericService";
+export * from "./CharactersService";
 export * from "./MarvelService";

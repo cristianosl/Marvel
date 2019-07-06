@@ -1,23 +1,23 @@
 import React from "react";
 import {
-  CharacterDataWrapper,
-  CharacterParameters
+  CharacterParameters, Character
 } from "../../models/characters";
 import { CharacterContainer } from "../characteres/CharacterContainer";
 import { PaginationCharacters } from "../ui/PaginationCharacters";
-import { CharacterService } from "../../services";
+import { CharactersService } from "../../services";
 import { Layout } from "../layouts/Layout";
 import { Filters } from "../ui";
+import { DataWrapper } from "../../models";
 
 /**
  * Interface para as props
  */
-interface IAppProps {}
+interface IAppProps { }
 /**
  * Interface para o state
  */
 interface IAppState {
-  characterDataWrapper: CharacterDataWrapper | null;
+  characterDataWrapper: DataWrapper<Character> | null;
   carregando: boolean;
 }
 
@@ -52,9 +52,9 @@ export class Home extends React.Component<IAppProps, IAppState> {
     this.setState({
       carregando: true
     });
-    let service = new CharacterService(params);
+    let service = new CharactersService(params);
     service
-      .getConsulta()
+      .getDataWrapper()
       .then(data => {
         this.setState({
           characterDataWrapper: data.data,

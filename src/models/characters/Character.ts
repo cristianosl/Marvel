@@ -1,4 +1,4 @@
-import { IModel } from "../IModel";
+import { IModel } from "../../interfaces/IModel";
 import { Image } from "../Image";
 import { List } from "../List";
 /**

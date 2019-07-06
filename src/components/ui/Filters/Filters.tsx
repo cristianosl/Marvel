@@ -2,6 +2,10 @@ import React from "react";
 import { NivelFilter } from "./NivelFilter";
 import "./Filters.css";
 import { Grid } from "@material-ui/core";
+
+/**
+ * Container com os dropdowns dos níveis
+ */
 export function Filters() {
   const nivelOpts1 = ["Comics", "Events", "Series"];
   const nivelOpts2 = ["Comics2", "Events2", "Series2"];

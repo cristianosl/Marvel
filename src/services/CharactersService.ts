@@ -1,36 +1,35 @@
 import { MarvelService } from "./MarvelService";
 import {
   Character,
-  CharacterDataWrapper,
   CharacterParameters
 } from "../models/characters/index";
 import { AxiosResponse } from "axios";
+import { DataWrapper } from "../models";
+import { IService, ICharacterParametersJSON } from "../interfaces";
 
 /**
  * Realiza uma consulta de personagens
  */
-export class CharacterService extends MarvelService {
-
-  // Argumentos da consulta
-  private _args?: CharacterParameters;
+export class CharactersService extends MarvelService implements IService<Character, ICharacterParametersJSON> {
 
   // Armazena a requição da instancia para não precisar chamar novamente
-  private _res?: AxiosResponse<CharacterDataWrapper>;
+  private _res?: AxiosResponse<DataWrapper<Character>>;
 
+  public endpoint = "/characters";
   /**
    * Construtor
-   * @param args Argumentos da consulta (opcional)
+   * @param endpoint Endpoint destas consultas
+   * @param queryParams Argumentos da consulta (opcional)
    */
-  constructor(args?: CharacterParameters) {
+  constructor(public queryParams?: CharacterParameters) {
     super();
-    this._args = args;
   }
 
-  public getConsulta(): Promise<AxiosResponse<CharacterDataWrapper>> {
+  public getDataWrapper(): Promise<AxiosResponse<DataWrapper<Character>>> {
     // Mescla os parametros defaults com os novos recebidos
     let merged = {};
-    if (this._args) {
-      merged = { ...this.queryJSONAuth, ...this._args.toJSON() };
+    if (this.queryParams) {
+      merged = { ...this.queryJSONAuth, ...this.queryParams.toJSON() };
     } else {
       merged = { ...this.queryJSONAuth };
     }
@@ -39,7 +38,7 @@ export class CharacterService extends MarvelService {
     if (!this._res) {
       // Retorna uma promisse com os personagens encontrados
       return this._service
-        .get<CharacterDataWrapper>("/characters", {
+        .get<DataWrapper<Character>>(this.endpoint, {
           params: merged
         })
         .then(res => {
@@ -47,7 +46,7 @@ export class CharacterService extends MarvelService {
           return res;
         });
 
-    // Caso já exista uma requisição retorna ela novamente
+      // Caso já exista uma requisição retorna ela novamente
     } else {
       return new Promise((resolve, reject) => {
         resolve(this._res);
@@ -61,7 +60,7 @@ export class CharacterService extends MarvelService {
    */
   getCharacters(): Promise<Character[]> {
     // Retorna uma promisse com os personagens encontrados
-    return this.getConsulta().then(res => {
+    return this.getDataWrapper().then(res => {
       let characters: Character[] = [];
       if (res.data && res.data.data && res.data.data.results) {
         characters = res.data.data.results;

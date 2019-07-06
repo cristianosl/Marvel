@@ -8,7 +8,7 @@ it("Renderizar o <CharacterItem /> corretamente", () => {
     1,
     "nome",
     "descricao",
-    new Date(),
+    new Date(), 
     new Image("imagem", "jpg"),
     "http://www.1.com"
   );

@@ -1,8 +1,10 @@
-import { IList } from "./IList";
+import { IList } from "../interfaces/IList";
 import { Summary } from "./Summary";
-import { IModel } from "./IModel";
 
-export class List implements IList<Summary>, IModel {
+/**
+ * Listam dos registros
+ */
+export class List implements IList<Summary> {
   constructor(
     readonly available: number,
     readonly returned: number,

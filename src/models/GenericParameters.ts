@@ -1,9 +1,10 @@
-import { IParamsQuery, ICharacterParametersJSON } from "../../interfaces";
+import { IGenericParametersJSON, IParamsQuery } from "../interfaces";
+
 
 /**
  * Define os parametros de entradas permitidos para realizar uma busca por personagens
  */
-export class CharacterParameters implements IParamsQuery<ICharacterParametersJSON> {
+export class GenericParameters implements IParamsQuery<IGenericParametersJSON> {
   constructor(
     public limit: number = 18,
     public offset: number = 0,
@@ -16,7 +17,7 @@ export class CharacterParameters implements IParamsQuery<ICharacterParametersJSO
   /**
    * Retorna um json para ser utilizado nas buscas
    */
-  toJSON(): ICharacterParametersJSON {
+  toJSON(): IGenericParametersJSON {
     let r: any = {};
     r.limit = this.limit;
     r.offset = this.offset;

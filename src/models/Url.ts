@@ -1,8 +1,6 @@
-import { IModel } from ".";
-
 /**
  * Representação de uma URL
  */
-export class Url implements IModel{
+export class Url {
   constructor(readonly type: string, readonly url: string) {}
 }

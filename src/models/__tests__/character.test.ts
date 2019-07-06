@@ -10,7 +10,7 @@ it("instancia um novo personagem", () => {
   let resourceURI = "https://www.marvel.com/";
   let character = new Character(
     id,
-    name,
+    name, 
     description,
     modified,
     thumbnail,

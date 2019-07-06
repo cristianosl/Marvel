@@ -1,4 +1,3 @@
-import { IService } from "./IService";
 import axios, { AxiosInstance } from "axios";
 import { Md5 } from "ts-md5/dist/md5";
 
@@ -14,7 +13,7 @@ interface IQueryJSON {
 /**
  * Define os padrões para todos os serviços que serão consumidos pelas classes de serviços da Marvel
  */
-export abstract class MarvelService implements IService {
+export abstract class MarvelService {
   // Instancia axios
   _service: AxiosInstance;
   // timestamp
