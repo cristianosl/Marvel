@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css";
-import logoSiteBlindado from "../../images/site-blindado-logo.png";
-import logoMarvel from "../../images/MarvelLogo.svg";
+import logoSiteBlindado from "../../assets/imgs/site-blindado-logo.png";
+import logoMarvel from "../../assets/imgs/MarvelLogo.svg";
 import { Link } from "react-router-dom";
 export const Header: React.FC = props => {
   return (

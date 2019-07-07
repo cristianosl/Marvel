@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { PaginationCharacters } from "../../home/pagination/PaginationCharacters";
+import { PaginationCharacters } from "../PaginationCharacters";
 
 const onClickPaginationHandler = (
   e: React.MouseEvent<HTMLElement, MouseEvent>,

@@ -1,13 +1,13 @@
 import React from "react";
-import { CharacterParameters, Character } from "../../models/characters";
-import { CharacterContainer } from "../characteres/CharacterContainer";
-import { PaginationCharacters } from "../ui/PaginationCharacters";
-import { CharactersService } from "../../services";
+import { CharacterParameters, Character } from "../models/characters";
+import { CharacterContainer } from "../components/home/characteres/CharacterContainer";
+import { PaginationCharacters } from "../components/home/pagination/PaginationCharacters";
+import { CharactersService } from "../services";
 import { Layout } from "../layouts/Layout";
-import { Filters } from "../ui";
-import { DataWrapper } from "../../models";
-import { IPropsRouterPage } from "../../interfaces";
-import { ErrorSnackbar } from "../ui/index";
+import { Filters } from "../components/home/filters/Filters";
+import { DataWrapper } from "../models";
+import { IPropsRouterPage } from "../interfaces";
+import { ErrorSnackbar } from "../components/ui/ErrorSnackbar";
 
 /**
  * Interface para os parâmetros que poderão se chamados na URL

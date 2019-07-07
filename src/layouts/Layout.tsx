@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "@material-ui/core";
-import { Header } from "../ui/Header";
+import { Header } from "../components/layouts/Header";
 import "./Layout.css";
 
 interface props {

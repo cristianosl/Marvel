@@ -2,8 +2,8 @@ import React, { useDebugValue } from "react";
 import { CharacterContainer } from "../CharacterContainer";
 import { CharacterItem } from "../CharacterItem";
 import { shallow } from "enzyme";
-import { Character } from "../../../models/characters";
-import { DataContainer, Image } from "../../../models";
+import { Character } from "../../../../models/characters";
+import { DataContainer, Image } from "../../../../models";
 
 it("Renderizar o <CharacterContainer /> corretamente", () => {
   let c1 = new Character(

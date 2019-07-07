@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DataContainer, Character } from "../../models/index";
+import { DataContainer, Character } from "../../../models/index";
 import { CharacterItem } from "./CharacterItem";
 import { Grid } from "@material-ui/core";
 import './CharacterContainer.css';

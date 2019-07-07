@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Character, Image } from "../../models/index";
+import { Character, Image } from "../../../models/index";
 import { Grid, Paper, Button } from "@material-ui/core";
 import "./CharacterItem.css";
 import { LinkProps, Link } from "react-router-dom";

@@ -2,7 +2,7 @@ import React from "react";
 import { NivelFilter } from "./NivelFilter";
 import "./Filters.css";
 import { Grid } from "@material-ui/core";
-import { NivelOption } from "../../../models";
+import { NivelOption } from "../../../models/index";
 
 /**
  * Container com os dropdowns dos níveis
