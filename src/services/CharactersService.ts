@@ -1,17 +1,14 @@
 import { MarvelService } from "./MarvelService";
-import {
-  Character,
-  CharacterParameters
-} from "../models/characters/index";
+import { Character, CharacterParameters } from "../models/characters/index";
 import { AxiosResponse } from "axios";
 import { DataWrapper } from "../models";
-import { IService, ICharacterParametersJSON } from "../interfaces";
+import { IService, ICharacterParametersJSON, IErrorService } from "../interfaces";
 
 /**
  * Realiza uma consulta de personagens
  */
-export class CharactersService extends MarvelService implements IService<Character, ICharacterParametersJSON> {
-
+export class CharactersService extends MarvelService
+  implements IService<Character, ICharacterParametersJSON> {
   // Armazena a requição da instancia para não precisar chamar novamente
   private _res?: AxiosResponse<DataWrapper<Character>>;
 
@@ -44,6 +41,10 @@ export class CharactersService extends MarvelService implements IService<Charact
         .then(res => {
           this._res = res;
           return res;
+        })
+        .catch((error: IErrorService) => {
+          console.log("ERROR", error.response.data);
+          throw new Error("ERRO: Não foi possível obter os dados selecionados");
         });
 
       // Caso já exista uma requisição retorna ela novamente

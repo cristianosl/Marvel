@@ -1,35 +1,50 @@
 import React from "react";
-import {
-  CharacterParameters, Character
-} from "../../models/characters";
+import { CharacterParameters, Character } from "../../models/characters";
 import { CharacterContainer } from "../characteres/CharacterContainer";
 import { PaginationCharacters } from "../ui/PaginationCharacters";
 import { CharactersService } from "../../services";
 import { Layout } from "../layouts/Layout";
 import { Filters } from "../ui";
 import { DataWrapper } from "../../models";
+import { IPropsRouterPage } from "../../interfaces";
+import { ErrorSnackbar } from "../ui/index";
 
 /**
- * Interface para as props
+ * Interface para os parâmetros que poderão se chamados na URL
  */
-interface IAppProps { }
+interface TParams {}
+
 /**
  * Interface para o state
  */
 interface IAppState {
-  characterDataWrapper: DataWrapper<Character> | null;
+  /**
+   * DataWrappers de personagens
+   */
+  characterDataWrapper?: DataWrapper<Character>;
+
+  /**
+   * Informa se a página está carregando
+   */
   carregando: boolean;
+
+  /**
+   * Armazena mensagens de erros
+   */
+  errorServiceDetails?: Error;
 }
 
 /**
  * Component inicial
  */
-export class Home extends React.Component<IAppProps, IAppState> {
-  constructor(props: IAppProps) {
+export class Home extends React.Component<
+  IPropsRouterPage<TParams>,
+  IAppState
+> {
+  constructor(props: IPropsRouterPage<TParams>) {
     super(props);
 
     this.state = {
-      characterDataWrapper: null,
       carregando: false
     };
   }
@@ -62,8 +77,15 @@ export class Home extends React.Component<IAppProps, IAppState> {
         });
         window.scroll({ top: 0, left: 0, behavior: "smooth" });
       })
-      .catch(error => {
-        console.log(error);
+      .catch((error: Error) => {
+        this.setState({
+          errorServiceDetails: error
+        });
+      })
+      .finally(() => {
+        this.setState({
+          carregando: false
+        });
       });
   }
   render() {
@@ -90,6 +112,13 @@ export class Home extends React.Component<IAppProps, IAppState> {
               onClick={this.onClickPagination.bind(this)}
             />
           )}
+        {!this.state.characterDataWrapper && <h3>Nenhum resultado encontrado</h3>}
+        {this.state && this.state.errorServiceDetails && (
+          <ErrorSnackbar
+            message={this.state.errorServiceDetails.message}
+            open={true}
+          />
+        )}
       </Layout>
     );
   }

@@ -9,7 +9,7 @@ import {
   ListItemText
 } from "@material-ui/core";
 import "./NivelFilter.css";
-
+import { NivelOption } from "../../../models";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -24,21 +24,24 @@ const MenuProps = {
 
 interface INivelProps {
   label: string;
-  nivelOpts: string[];
+  nivelOpts: NivelOption[];
 }
 
 /**
  * Dropdowns de niveis
- * 
+ *
  * @param props Propriedades
  */
 export function NivelFilter(props: INivelProps) {
   // const classes = useStyles();
-  const [nivelValue, setNivel] = React.useState<string[]>([]);
+  const [nivelValues, setNivel] = React.useState<string[]>([]);
 
   function handleChangeNivel(event: React.ChangeEvent<{ value: unknown }>) {
     setNivel(event.target.value as string[]);
   }
+
+  const findByValue = (value: string) => (nivelValue: string) =>
+    value === nivelValue;
 
   return (
     <FormControl className="form-control">
@@ -47,7 +50,7 @@ export function NivelFilter(props: INivelProps) {
       </InputLabel>
       <Select
         multiple
-        value={nivelValue}
+        value={nivelValues}
         onChange={handleChangeNivel}
         input={<Input id="select-multiple-checkbox" />}
         renderValue={selected => (selected as string[]).join(", ")}
@@ -55,9 +58,17 @@ export function NivelFilter(props: INivelProps) {
         className="filter-select"
       >
         {props.nivelOpts.map(nivelOpt => (
-          <MenuItem key={nivelOpt} value={nivelOpt} className="menu-item">
-            <Checkbox checked={nivelValue.indexOf(nivelOpt) > -1} />
-            <ListItemText primary={nivelOpt} />
+          <MenuItem
+            key={nivelOpt.value}
+            value={nivelOpt.value}
+            className="menu-item"
+          >
+            <Checkbox
+              checked={
+                nivelValues.find(findByValue(nivelOpt.value)) !== undefined
+              }
+            />
+            <ListItemText primary={nivelOpt.text} />
           </MenuItem>
         ))}
       </Select>

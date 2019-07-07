@@ -14,15 +14,25 @@ interface IQueryJSON {
  * Define os padrões para todos os serviços que serão consumidos pelas classes de serviços da Marvel
  */
 export abstract class MarvelService {
-  // Instancia axios
+  /**
+   * Instancia axios
+   */
   _service: AxiosInstance;
-  // timestamp
+  /**
+   * timestamp
+   */
   private _ts: number;
-  // chave privada
+  /**
+   * chave privada
+   */
   private _prk: string;
-  // chave publica
+  /**
+   * chave publica
+   */
   protected _puk: string;
-  // hash = md5(_ts + _prk + _puk)
+  /**
+   * hash = md5(_ts + _prk + _puk)
+   */
   private _hash: string;
 
   constructor() {
