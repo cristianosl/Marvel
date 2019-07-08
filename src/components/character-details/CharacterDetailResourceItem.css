@@ -1,0 +1,27 @@
+.character-detail__resources__item {
+  margin-bottom: 10px;
+  display: flex;
+  padding: 20px 20px 20px 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(96, 0, 0);
+  border-radius: 10px;
+}
+
+.character-detail__resources__item__name {
+  font-family: "Bangers", cursive;
+  font-size: 30px;
+}
+.character-detail__resources__item__description {
+  font-size: 16px;
+  padding: 0 0 0px 0;
+  color: rgb(96, 0, 0);
+  font-style: italic;
+  font-weight: bold;
+}
+
+.character-detail__resources__item__description ul {
+  margin: 0;
+}
+.character-detail__resources__item__description ul li {
+  line-height: 25px;
+}

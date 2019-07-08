@@ -25,6 +25,9 @@ const MenuProps = {
 interface INivelProps {
   label: string;
   nivelOpts: NivelOption[];
+  nivelValues: string[];
+  onChange(event: React.ChangeEvent<{ value: unknown }>): void;
+  disabled?: boolean;
 }
 
 /**
@@ -33,27 +36,37 @@ interface INivelProps {
  * @param props Propriedades
  */
 export function NivelFilter(props: INivelProps) {
-  // const classes = useStyles();
-  const [nivelValues, setNivel] = React.useState<string[]>([]);
-
-  function handleChangeNivel(event: React.ChangeEvent<{ value: unknown }>) {
-    setNivel(event.target.value as string[]);
-  }
-
   const findByValue = (value: string) => (nivelValue: string) =>
     value === nivelValue;
 
+  /** Formata os valores selecionados para exibição  */
+  const getRenderValue = (selected: unknown) => {
+    const selecionados = selected as string[];
+    // console.log("selecionados", selecionados);
+    // console.log("props.nivelOpts", props.nivelOpts);
+    /** Armazena os textos dos itens selecionados */
+    const selecionadosTexts = selecionados.map(itemValue => {
+      const itemLocalizado = props.nivelOpts.find(
+        item => item.value === itemValue
+      );
+      if (itemLocalizado) return itemLocalizado.text;
+      return false;
+    });
+    /** Retorna separados por "," */
+    if (selecionadosTexts.length > 0) return selecionadosTexts.join(", ");
+  };
+
   return (
-    <FormControl className="form-control">
+    <FormControl className="form-control" disabled={props.disabled}>
       <InputLabel htmlFor="select-multiple-checkbox" className="label">
         {props.label}
       </InputLabel>
       <Select
         multiple
-        value={nivelValues}
-        onChange={handleChangeNivel}
+        value={props.nivelValues}
+        onChange={props.onChange}
         input={<Input id="select-multiple-checkbox" />}
-        renderValue={selected => (selected as string[]).join(", ")}
+        renderValue={getRenderValue}
         MenuProps={MenuProps}
         className="filter-select"
       >
@@ -65,7 +78,8 @@ export function NivelFilter(props: INivelProps) {
           >
             <Checkbox
               checked={
-                nivelValues.find(findByValue(nivelOpt.value)) !== undefined
+                props.nivelValues.find(findByValue(nivelOpt.value)) !==
+                undefined
               }
             />
             <ListItemText primary={nivelOpt.text} />

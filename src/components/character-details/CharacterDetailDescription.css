@@ -1,0 +1,10 @@
+.character-detail__description {
+  color: #fff;
+  padding: 20px 30px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  background-color: rgba(96, 0, 0, 1);
+  font-weight: bold;
+  font-style: italic;
+  font-size: 18px;
+}

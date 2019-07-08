@@ -8,4 +8,5 @@ export interface ICharacterParametersJSON {
   comics?: number | string;
   series?: number | string;
   events?: number | string;
+  stories?: number | string;
 }

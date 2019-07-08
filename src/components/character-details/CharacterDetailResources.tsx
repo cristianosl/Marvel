@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import "./CharacterDetailResources.css";
 export interface IProps {
   children?: ReactNode;
 }

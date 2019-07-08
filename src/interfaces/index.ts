@@ -1,5 +1,6 @@
 export * from './IList';
 export * from './IModel';
+export * from './IResource';
 export * from './ISummary';
 export * from './IService';
 export * from './IParamsQuery';

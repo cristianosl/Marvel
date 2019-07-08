@@ -5,9 +5,14 @@ import { PaginationCharacters } from "../components/home/pagination/PaginationCh
 import { CharactersService } from "../services";
 import { Layout } from "../layouts/Layout";
 import { Filters } from "../components/home/filters/Filters";
-import { DataWrapper } from "../models";
+import { DataWrapper, NivelOption } from "../models";
 import { IPropsRouterPage } from "../interfaces";
 import { ErrorSnackbar } from "../components/ui/ErrorSnackbar";
+import {
+  getCharacterParametersByNivel2,
+  getCharacterParametersByQuery,
+  atualizarUrlByParams
+} from "../helpers/character-parameters";
 
 /**
  * Interface para os parâmetros que poderão se chamados na URL
@@ -32,6 +37,11 @@ interface IAppState {
    * Armazena mensagens de erros
    */
   errorServiceDetails?: Error;
+
+  /**
+   * Parâmetros da consulta atual
+   */
+  parametrosConsulta: CharacterParameters;
 }
 
 /**
@@ -43,26 +53,32 @@ export class Home extends React.Component<
 > {
   constructor(props: IPropsRouterPage<TParams>) {
     super(props);
-
     this.state = {
-      carregando: false
+      carregando: false,
+      parametrosConsulta: getCharacterParametersByQuery()
     };
   }
 
   componentDidMount() {
-    let params = new CharacterParameters();
-    this.consultarDados(params);
+    this.consultarDados(this.state.parametrosConsulta);
   }
 
   onClickPagination(
     e: React.MouseEvent<HTMLElement, MouseEvent>,
     offset: number
   ) {
-    let params = new CharacterParameters();
+    const params = this.state.parametrosConsulta;
     params.offset = offset;
+    this.setState({
+      parametrosConsulta: params
+    });
+    atualizarUrlByParams(params);
     this.consultarDados(params);
   }
 
+  /**
+   * Consulta os dados de acordo com os parâmetros informados
+   */
   consultarDados(params: CharacterParameters) {
     this.setState({
       carregando: true
@@ -88,6 +104,33 @@ export class Home extends React.Component<
         });
       });
   }
+
+  /**
+   * Ação do botão de enviar dos filtros
+   * @param nivel1 Opções selecionadas no nível 1
+   * @param nivel2 Opções selecionadas no nível 2
+   */
+  handleFiltersSubmit(nivel1: NivelOption[], nivel2: NivelOption[]) {
+    const params = getCharacterParametersByNivel2(
+      this.state.parametrosConsulta,
+      nivel2
+    );
+    this.setState({
+      parametrosConsulta: params
+    });
+
+    atualizarUrlByParams(params);
+    this.consultarDados(params);
+  }
+  handleOnReset(): void {
+    const params = new CharacterParameters();
+    this.setState({
+      parametrosConsulta: params
+    });
+
+    atualizarUrlByParams(params);
+    this.consultarDados(params);
+  }
   render() {
     return (
       <Layout
@@ -97,11 +140,18 @@ export class Home extends React.Component<
             : "container"
         }
       >
-        <Filters />
+        <Filters
+          onSubmit={this.handleFiltersSubmit.bind(this)}
+          onReset={this.handleOnReset.bind(this)}
+        />
         {this.state.characterDataWrapper &&
           this.state.characterDataWrapper.data && (
             <CharacterContainer {...this.state.characterDataWrapper.data} />
           )}
+        {(!this.state.characterDataWrapper ||
+          this.state.characterDataWrapper.data.total === 0) && (
+          <h3 style={{ textAlign: "center" }}>Nenhum resultado encontrado</h3>
+        )}
         {this.state.characterDataWrapper &&
           this.state.characterDataWrapper.data &&
           typeof this.state.characterDataWrapper.data.total === "number" && (
@@ -112,7 +162,6 @@ export class Home extends React.Component<
               onClick={this.onClickPagination.bind(this)}
             />
           )}
-        {!this.state.characterDataWrapper && <h3>Nenhum resultado encontrado</h3>}
         {this.state && this.state.errorServiceDetails && (
           <ErrorSnackbar
             message={this.state.errorServiceDetails.message}

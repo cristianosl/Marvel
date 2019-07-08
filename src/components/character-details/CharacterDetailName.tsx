@@ -1,4 +1,5 @@
 import React from "react";
+import "./CharacterDetailName.css";
 export interface IProps {
   name: string;
 }

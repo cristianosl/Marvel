@@ -9,6 +9,9 @@ import { CharacterDetailPicture } from "../components/character-details/Characte
 import { CharacterDetailName } from "../components/character-details/CharacterDetailName";
 import { CharacterDetailId } from "../components/character-details/CharacterDetailId";
 import { CharacterDetailResources } from "../components/character-details/CharacterDetailResources";
+import { CharacterDetailResourceItem } from "../components/character-details/CharacterDetailResourceItem";
+import { CharacterDetailDescription } from "../components/character-details/CharacterDetailDescription";
+import { Grid } from "@material-ui/core";
 
 /**
  * Parâmetros da URL
@@ -18,6 +21,7 @@ type TParams = { id: string };
 interface IState {
   character?: Character;
   errorServiceDetails?: Error;
+  carregando: boolean;
 }
 
 // params: RouteComponentProps<TParams>
@@ -25,18 +29,13 @@ export class CharacterDetails extends React.Component<
   IPropsRouterPage<TParams>,
   IState
 > {
-  // constructor(props: IPropsRouterPage<TParams>) {
-  //   super(props);
-  // }
-
   componentDidMount() {
-    // const { match }: RouteComponentProps<TParams> = props.params;
-    // console.log(props.match.params);
     const characterId = parseInt(this.props.match.params.id);
-
+    this.setState({
+      carregando: true
+    });
     // Realiza uma consulta por personagem
     const service = new GenericService<Character>(`/characters/${characterId}`);
-
     service
       .getModels()
       .then(models => {
@@ -56,7 +55,7 @@ export class CharacterDetails extends React.Component<
               new Image(model.thumbnail.path, model.thumbnail.extension),
               model.resourceURI,
               model.comics,
-              model.series,
+              model.stories,
               model.events,
               model.series
             )
@@ -67,82 +66,76 @@ export class CharacterDetails extends React.Component<
         this.setState({
           errorServiceDetails: error
         });
+      })
+      .finally(() => {
+        this.setState({
+          carregando: false
+        });
       });
   }
 
   render() {
     return (
       <Layout className="container">
-        <div className="btn-back">
+        {/* <div className="btn-back">
           <a href="http://">Todos personagens</a>
-        </div>
-        {this.state && this.state.character && (
-          <CharacterDetailContainer>
-            <CharacterDetailPicture
-              src={this.state.character.thumbnail.getFullPath()}
-              alt={this.state.character.name}
-            />
-            <CharacterDetailName name={this.state.character.name} />
-            <CharacterDetailId id={this.state.character.id} />
-            <CharacterDetailResources>
-              <div className="character-detail__resources__item">
-                <div className="character-detail__resources__item__name">
-                  Comics:
-                </div>
-                <div className="character-detail__resources__item__description">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Animi numquam voluptatum, perspiciatis laboriosam hic eligendi
-                  sint atque alias ad voluptatibus non corporis? Vero dolorem
-                  officia alias molestiae voluptatum? Asperiores, fuga.
-                </div>
-              </div>
-              <div className="character-detail__resources__item">
-                <div className="character-detail__resources__item__name">
-                  Stories:
-                </div>
-                <div className="character-detail__resources__item__description">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Animi numquam voluptatum, perspiciatis laboriosam hic eligendi
-                  sint atque alias ad voluptatibus non corporis? Vero dolorem
-                  officia alias molestiae voluptatum? Asperiores, fuga.
-                </div>
-              </div>
-              <div className="character-detail__resources__item">
-                <div className="character-detail__resources__item__name">
-                  Events:
-                </div>
-                <div className="character-detail__resources__item__description">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Animi numquam voluptatum, perspiciatis laboriosam hic eligendi
-                  sint atque alias ad voluptatibus non corporis? Vero dolorem
-                  officia alias molestiae voluptatum? Asperiores, fuga.
-                </div>
-              </div>
-              <div className="character-detail__resources__item">
-                <div className="character-detail__resources__item__name">
-                  Series:
-                </div>
-                <div className="character-detail__resources__item__description">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Animi numquam voluptatum, perspiciatis laboriosam hic eligendi
-                  sint atque alias ad voluptatibus non corporis? Vero dolorem
-                  officia alias molestiae voluptatum? Asperiores, fuga.
-                </div>
-              </div>
-            </CharacterDetailResources>
+        </div> */}
 
-            <div className="detail__picture__description">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
-              illum distinctio inventore. Enim autem molestias eligendi,
-              laudantium veniam sunt maiores facere cupiditate quia, hic, eius
-              unde in quos illum voluptas.
-            </div>
-          </CharacterDetailContainer>
-        )}
-        <div>[{this.props.match.params.id}] Detalhe do personagem</div>
         {(!this.state || this.state.character === undefined) && (
           <h3>O personagem selecionado não foi encontrado</h3>
         )}
+        {this.state && this.state.character && (
+          <CharacterDetailContainer>
+            <Grid container>
+              <Grid item>
+                <CharacterDetailPicture
+                  src={this.state.character.thumbnail.getFullPath()}
+                  alt={this.state.character.name}
+                />
+              </Grid>
+              <Grid item>
+                <CharacterDetailName name={this.state.character.name} />
+                <CharacterDetailId id={this.state.character.id} />
+              </Grid>
+            </Grid>
+            {this.state.character.description && (
+              <CharacterDetailDescription
+                description={this.state.character.description}
+              />
+            )}
+            <CharacterDetailResources>
+              {this.state.character.comics &&
+                this.state.character.comics.returned > 0 && (
+                  <CharacterDetailResourceItem
+                    itemName="Comics"
+                    data={this.state.character.comics}
+                  />
+                )}
+              {this.state.character.stories &&
+                this.state.character.stories.returned > 0 && (
+                  <CharacterDetailResourceItem
+                    itemName="Stories"
+                    data={this.state.character.stories}
+                  />
+                )}
+              {this.state.character.events &&
+                this.state.character.events.returned > 0 && (
+                  <CharacterDetailResourceItem
+                    itemName="Events"
+                    data={this.state.character.events}
+                  />
+                )}
+              {this.state.character.series &&
+                this.state.character.series.returned > 0 && (
+                  <CharacterDetailResourceItem
+                    itemName="Series"
+                    data={this.state.character.series}
+                  />
+                )}
+            </CharacterDetailResources>
+          </CharacterDetailContainer>
+        )}
+
         {this.state && this.state.errorServiceDetails && (
           <ErrorSnackbar
             message={this.state.errorServiceDetails.message}

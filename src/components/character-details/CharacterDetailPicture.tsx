@@ -1,4 +1,5 @@
 import React from "react";
+import "./CharacterDetailPicture.css";
 export interface IProps {
   src: string;
   alt: string;
@@ -6,8 +7,8 @@ export interface IProps {
 export class CharacterDetailPicture extends React.Component<IProps> {
   render() {
     return (
-      <div className="detail__picture">
-        <img src={this.props.src} alt={this.props.alt} width="150" />
+      <div className="character-detail__picture">
+        <img src={this.props.src} alt={this.props.alt} />
       </div>
     );
   }
