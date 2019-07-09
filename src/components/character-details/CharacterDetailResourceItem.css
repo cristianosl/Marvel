@@ -10,6 +10,7 @@
 .character-detail__resources__item__name {
   font-family: "Bangers", cursive;
   font-size: 30px;
+  padding-bottom: 20px;
 }
 .character-detail__resources__item__description {
   font-size: 16px;
