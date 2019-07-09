@@ -11,7 +11,9 @@ import { CharacterDetailId } from "../components/character-details/CharacterDeta
 import { CharacterDetailResources } from "../components/character-details/CharacterDetailResources";
 import { CharacterDetailResourceItem } from "../components/character-details/CharacterDetailResourceItem";
 import { CharacterDetailDescription } from "../components/character-details/CharacterDetailDescription";
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
+import { createBrowserHistory } from "history";
+import "./CharacterDetails.css";
 
 /**
  * Parâmetros da URL
@@ -74,15 +76,24 @@ export class CharacterDetails extends React.Component<
       });
   }
 
+  onClickVoltar() {
+    const history = createBrowserHistory();
+    history.goBack();
+  }
+
   render() {
     return (
       <Layout className="container">
-        {/* <div className="btn-back">
-          <a href="http://">Todos personagens</a>
-        </div> */}
+        <div className="back-container">
+          <Button onClick={this.onClickVoltar} className="back-container__btn">
+            Voltar
+          </Button>
+        </div>
 
         {(!this.state || this.state.character === undefined) && (
-          <h3>O personagem selecionado não foi encontrado</h3>
+          <h3 style={{ textAlign: "center" }}>
+            O personagem selecionado não foi encontrado
+          </h3>
         )}
         {this.state && this.state.character && (
           <CharacterDetailContainer>
