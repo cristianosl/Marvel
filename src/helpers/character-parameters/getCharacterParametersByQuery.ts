@@ -1,5 +1,8 @@
 import { CharacterParameters } from "../../models/characters";
 
+/**
+ * Retorna os parametros do personagem de acordo com a URL
+ */
 export const getCharacterParametersByQuery = () => {
   const params = new CharacterParameters();
   const paramsQuery = new URLSearchParams(window.location.search);

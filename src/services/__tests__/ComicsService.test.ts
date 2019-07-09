@@ -4,7 +4,7 @@ import { GenericParameters } from "../../models/GenericParameters";
 
 describe("Testando consumo de serviços referente aos personagens", () => {
 
-  xit("Deve retornar uma lista de comics", async () => {
+  it("Deve retornar uma lista de comics", async () => {
     expect.assertions(5);
     const service = new GenericService<Comic>("/comics");
     const dataWrapper = await service.getDataWrapper();
@@ -23,7 +23,7 @@ describe("Testando consumo de serviços referente aos personagens", () => {
     expect(dataWrapper.data.data.count).toBe(3);
   });
 
-  xit("Verifica um dos \"comics\" que foram retornados", async () => {
+  it("Verifica um dos \"comics\" que foram retornados", async () => {
     expect.assertions(1);
     const service = new GenericService<Comic>("/comics");
     const models = await service.getModels();

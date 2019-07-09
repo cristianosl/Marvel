@@ -1,5 +1,12 @@
 import { CharacterParameters } from "../../models/characters";
 import { NivelOption } from "../../models";
+
+/**
+ * Retorna os novos parâmetros referente a escolha do nível 2
+ * @param params Parâmetros atuais da consulta dos personagens
+ * @param nivel2 Insere nos novos parâmetros os dados dos personagens de acordo com a seleção do nível 2
+ * @returns Novos parâmetros
+ */
 export const getCharacterParametersByNivel2 = (
   params: CharacterParameters,
   nivel2: NivelOption[]
