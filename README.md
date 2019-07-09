@@ -23,3 +23,10 @@ $ npm start
 
 Abra [http://localhost:3000](http://localhost:3000) para visualizar no navegador.
 
+
+
+Para executar os testes:
+
+```bash
+$ npm run test
+```
