@@ -9,6 +9,7 @@ import {
   getNivel1ValuesByQuery,
   getNivel2ValuesByQuery
 } from "../../../helpers/character-parameters";
+import { ErrorSnackbar } from "../../ui/ErrorSnackbar";
 
 interface IProps {
   onSubmit(nive1: NivelOption[], nivel2: NivelOption[]): void;
@@ -21,6 +22,10 @@ interface IState {
   nivel1Values: string[];
   nivel2Values: string[];
   carregando: boolean;
+  /**
+   * Armazena mensagens de erros
+   */
+  errorServiceDetails?: Error;
 }
 /**
  * Container com os dropdowns dos níveis
@@ -67,17 +72,23 @@ export class Filters extends React.Component<IProps, IState> {
     const nivel2Opts: NivelOption[] = [];
     // Carrega os novos dados
     nivel1Opts.forEach(async endpoint => {
-      const service = new GenericService<IResource>(endpoint);
-      const models = await service.getModels();
-      const niveis = models.map(
-        model =>
-          new NivelOption(model.id.toString(), model.title, model, endpoint)
-      );
-      nivel2Opts.push(...niveis);
-      this.setState({
-        nivelOpts2: nivel2Opts,
-        carregando: false
-      });
+      try {
+        const service = new GenericService<IResource>(endpoint);
+        const models = await service.getModels();
+        const niveis = models.map(
+          model =>
+            new NivelOption(model.id.toString(), model.title, model, endpoint)
+        );
+        nivel2Opts.push(...niveis);
+        this.setState({
+          nivelOpts2: nivel2Opts,
+          carregando: false
+        });
+      } catch (error) {
+        this.setState({
+          errorServiceDetails: error
+        });
+      }
     });
   }
 
@@ -144,6 +155,12 @@ export class Filters extends React.Component<IProps, IState> {
           >
             Limpar
           </Button>
+          {this.state && this.state.errorServiceDetails && (
+            <ErrorSnackbar
+              message={this.state.errorServiceDetails.message}
+              open={true}
+            />
+          )}
         </Grid>
       </Grid>
     );
